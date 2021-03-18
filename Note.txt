@@ -1,0 +1,27 @@
+1)Build and tag docker image with name & version from current directory
+$> docker build -t <image name>:<version> .
+$> docker build -t docker/api:1.0 .
+
+2)Publish, run (in detached mode) docker image with port mapping
+$> docker run -p <host port>:<container port> -v <docker volume name>:<container directory> -d --name <container name> <image name>:<version>
+$> docker run -p 8000:8080 -v apivol:/log -d --name api docker/api:1.0
+
+3)SSH into a running container
+i)Get the name of the existing container
+$> docker ps
+ii)Get a bash shell in the container
+$> docker exec -it <container name> <command>
+$> docker exec -it api pwd
+$> docker exec -it api /bin/sh (enter shell mode)
+
+4)Create docker volume
+$> docker volume create --name <volume name>
+$> docker volume create --name apivol
+relative location in windows (docker desktop)
+\\wsl$\docker-desktop-data\version-pack-data\community\docker\volumes\apivol\_data
+
+5)List volume in docker
+$> docker volume ls
+
+6)Remove untagged image
+$> docker image prune
